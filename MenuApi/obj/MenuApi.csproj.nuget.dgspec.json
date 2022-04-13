@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aki\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj": {}
+    "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aki\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj": {
+    "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aki\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj",
+        "projectUniqueName": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj",
         "projectName": "MenuApi",
-        "projectPath": "C:\\Users\\aki\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj",
-        "packagesPath": "C:\\Users\\aki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aki\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\obj\\",
+        "projectPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj",
+        "packagesPath": "C:\\Users\\Serhan Buran\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\aki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Serhan Buran\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,6 +44,18 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
