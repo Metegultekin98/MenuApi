@@ -4,6 +4,7 @@ namespace MenuApi.Entities.Items
 {
     public partial class ItemsDto
     {
+        public int Id { get; set; }
         public MediaGalleryDto MediaGallery { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
