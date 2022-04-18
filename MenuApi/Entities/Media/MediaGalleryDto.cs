@@ -5,7 +5,8 @@ namespace MenuApi.Entities.Media
 {
     public partial class MediaGalleryDto
     {
-        public IList<FileInfo> Files { get; set; } = new List<FileInfo>();
+        public int Id { get; set; }
+        //public IList<FileSystemInfo> Files { get; set; } = new List<FileSystemInfo>();
         public int GalleryStartIndex { get; set; }
         public int ThumbSize { get; set; } = 72;
         public int ImageSize { get; set; } = 600;

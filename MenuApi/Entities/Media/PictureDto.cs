@@ -4,6 +4,7 @@ namespace MenuApi.Entities.Media
 {
     public partial class PictureDto
     {
+        public int Id { get; set; }
         public int PictureId { get; set; }
         public int? Size { get; set; }
         public string ThumbImageUrl { get; set; }
@@ -13,6 +14,6 @@ namespace MenuApi.Entities.Media
         public int? FullSizeImageHeight { get; set; }
         public string Title { get; set; }
         public string AlternateText { get; set; }
-        public FileInfo File { get; set; }
+        //public FileSystemInfo File { get; set; }
     }
 }
