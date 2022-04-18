@@ -1,5 +1,7 @@
 ﻿using MenuApi.Dtos;
+using MenuApi.Dtos.Items;
 using MenuApi.Entities;
+using MenuApi.Entities.Items;
 using MenuApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,81 +14,87 @@ namespace MenuApi.Controllers
     [Route("items")]
     public class ItemsController : ControllerBase
     {
-        private readonly IItemRepositories repository;
+        private readonly IRepository<Items> _itemsRepo;
 
-        public ItemsController(IItemRepositories repository)
+        public ItemsController(IRepository<Items> itemsRepo)
         {
-            this.repository = repository;
+            _itemsRepo = itemsRepo ?? throw new ArgumentNullException(nameof(itemsRepo));
         }
 
         [HttpGet]
-        public IEnumerable<ItemDto> GetItems()
+        public IActionResult GetItems()
         {
-            var items = repository.GetItems().Select(item => item.AsDto());
-            return items;
+            var items = _itemsRepo.GetAll().Select(item => item.AsDto());
+            return Ok(items);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ItemDto> GetItem(Guid id)
+        public IActionResult GetItem(int itemId)
         {
-            var item = repository.GetItem(id);
+            var item = _itemsRepo.GetById(itemId);
 
             if(item == null)
             {
                 return NotFound();
             }
 
-            return item.AsDto();
+            return Ok(item.AsDto());
         }
 
         [HttpPost]
-        public ActionResult<ItemDto> CreateItem(ItemDto itemDto)
+        public IActionResult CreateItem(ItemsDto itemDto)
         {
-            Item item = new()
+            var now = DateTime.Now;
+            var zeroDate = DateTime.MinValue.AddHours(now.Hour).AddMinutes(now.Minute).AddSeconds(now.Second).AddMilliseconds(now.Millisecond);
+            int uniqueId = (int)(zeroDate.Ticks / 10000);
+
+            Items item = new()
             {
-                Id = Guid.NewGuid(),
                 Name = itemDto.Name,
-                Price = itemDto.Price,
-                CreatedDate = DateTimeOffset.UtcNow
+                ShortDescription = itemDto.ShortDescription,
+                Id = uniqueId,
+                CreatedOn = now,
             };
 
-            repository.CreateItem(item);
+            _itemsRepo.Insert(item);
 
             return CreatedAtAction(nameof(GetItem), new { id = item.Id}, item.AsDto());
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateItem(Guid id, UpdateItemDto itemDto)
+        public ActionResult UpdateItem(int itemId, ItemsDto itemDto)
         {
-            var existingItem = repository.GetItem(id);
+            var existingItem = _itemsRepo.GetById(itemId);
 
             if(existingItem is null)
             {
                 return NotFound();
             }
 
-            Item updatedItem = existingItem with
+            Items updatedItem = new Items
             {
                 Name = itemDto.Name,
-                Price= itemDto.Price,
+                ShortDescription= itemDto.ShortDescription,
             };
 
-            repository.UpdateItem(updatedItem);
+            existingItem = updatedItem;
+
+            _itemsRepo.Update(updatedItem);
 
             return NoContent();
         }
 
         [HttpDelete]
-        public ActionResult DeleteItem(Guid id)
+        public ActionResult DeleteItem(int itemId)
         {
-            var existingItem = repository.GetItem(id);
+            var existingItem = _itemsRepo.GetById(itemId);
 
             if (existingItem is null)
             {
                 return NotFound();
             }
 
-            repository.DeleteItem(id);
+            _itemsRepo.Delete(itemId);
 
             return NoContent();
         }

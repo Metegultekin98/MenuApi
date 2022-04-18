@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-namespace MenuApi.Entities.Media
+﻿namespace MenuApi.Dtos.Media
 {
-    public partial class MediaGalleryDto
+    public class MediaGalleryDto
     {
-        public int Id { get; set; }
         //public IList<FileSystemInfo> Files { get; set; } = new List<FileSystemInfo>();
         public int GalleryStartIndex { get; set; }
         public int ThumbSize { get; set; } = 72;

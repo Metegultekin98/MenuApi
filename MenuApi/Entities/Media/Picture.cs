@@ -2,9 +2,8 @@
 
 namespace MenuApi.Entities.Media
 {
-    public partial class PictureDto
+    public partial class Picture : BaseEntity
     {
-        public int Id { get; set; }
         public int PictureId { get; set; }
         public int? Size { get; set; }
         public string ThumbImageUrl { get; set; }
