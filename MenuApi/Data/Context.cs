@@ -2,6 +2,7 @@
 using MenuApi.Entities.Items;
 using MenuApi.Entities.Media;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace MenuApi.Data
 {
@@ -9,11 +10,11 @@ namespace MenuApi.Data
     {
 
         private const string ConnectionString = @"Data Source=213.142.148.200;Initial Catalog=peersMenuDB;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Lemoon1453!;Enlist=False;Pooling=True;Min Pool Size=1;Max Pool Size=100;Connect Timeout=15;User Instance=False";
-        DbSet<Category> CategoryDtos { get; set; }
-        DbSet<Items> ItemsDtos { get; set; }
-        DbSet<ItemsTag> ItemsTagDtos { get; set; }
-        DbSet<Picture> PictureDtos { get; set; }
-        DbSet<MediaGallery> MediaGalleryDtos { get; set; }
+        DbSet<Category> Category { get; set; }
+        DbSet<Items> Items { get; set; }
+        DbSet<ItemsTag> ItemsTag { get; set; }
+        DbSet<Picture> Picture { get; set; }
+        DbSet<MediaGallery> MediaGallery { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {

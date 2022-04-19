@@ -3,7 +3,7 @@ using System.IO;
 
 namespace MenuApi.Entities.Media
 {
-    public partial class MediaGallery
+    public partial class MediaGallery : BaseEntity
     {
         //public IList<FileSystemInfo> Files { get; set; } = new List<FileSystemInfo>();
         public int GalleryStartIndex { get; set; }

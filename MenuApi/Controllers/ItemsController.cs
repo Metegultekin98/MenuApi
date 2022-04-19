@@ -21,7 +21,7 @@ namespace MenuApi.Controllers
             _itemsRepo = itemsRepo ?? throw new ArgumentNullException(nameof(itemsRepo));
         }
 
-        [HttpGet]
+        [HttpGet("GetItems")]
         public IActionResult GetItems()
         {
             var items = _itemsRepo.GetAll().Select(item => item.AsDto());
@@ -96,7 +96,7 @@ namespace MenuApi.Controllers
 
             _itemsRepo.Delete(itemId);
 
-            return NoContent();
+            return Ok();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MenuApi.Entities.Items
 {
-    public class  ItemExtras
+    public class  ItemExtras : BaseEntity
     {
         public string Name { get; set; }
         public string Total { get; set; }

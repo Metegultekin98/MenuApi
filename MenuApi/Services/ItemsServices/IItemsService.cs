@@ -1,15 +1,16 @@
 ﻿using MenuApi.Entities.Items;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace MenuApi.Services
+namespace MenuApi.Services.ItemsServices
 {
-    public interface IItemsService
+    public  interface IItemsService
     {
-        List<Items> GetAll();
-        Task<IList<Items>> GetAllAsync();
-        Items GetBookById(int Id);
+        IList<Items> GetAllItems();
+        Items GetItemById(int itemId);
         void DeleteItem(Items item);
+        void DeleteItemById(int itemId);
         void UpdateItem(Items item);
         void InsertItem(Items item);
     }
