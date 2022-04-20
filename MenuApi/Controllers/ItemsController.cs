@@ -29,11 +29,11 @@ namespace MenuApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetItem(int itemId)
+        public IActionResult GetItem(int id)
         {
-            var item = _itemsRepo.GetById(itemId);
+            var item = _itemsRepo.GetById(id);
 
-            if(item == null)
+            if (item == null)
             {
                 return NotFound();
             }
@@ -41,60 +41,61 @@ namespace MenuApi.Controllers
             return Ok(item.AsDto());
         }
 
-        [HttpPost]
-        public IActionResult CreateItem(ItemsDto itemDto)
+        [HttpPost("CreateItem")]
+        public IActionResult CreateItem([FromBody] ItemsDto itemDto)
         {
             var now = DateTime.Now;
-            var zeroDate = DateTime.MinValue.AddHours(now.Hour).AddMinutes(now.Minute).AddSeconds(now.Second).AddMilliseconds(now.Millisecond);
-            int uniqueId = (int)(zeroDate.Ticks / 10000);
+            //var zeroDate = DateTime.MinValue.AddHours(now.Hour).AddMinutes(now.Minute).AddSeconds(now.Second).AddMilliseconds(now.Millisecond);
+            //int uniqueId = (int)(zeroDate.Ticks / 10000);
 
             Items item = new()
             {
                 Name = itemDto.Name,
                 ShortDescription = itemDto.ShortDescription,
-                Id = uniqueId,
                 CreatedOn = now,
             };
 
             _itemsRepo.Insert(item);
 
-            return CreatedAtAction(nameof(GetItem), new { id = item.Id}, item.AsDto());
+            return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item.AsDto());
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateItem(int itemId, ItemsDto itemDto)
+        public ActionResult UpdateItem(int id, [FromBody] ItemsDto itemDto)
         {
-            var existingItem = _itemsRepo.GetById(itemId);
+            var item = _itemsRepo.GetById(id);
 
-            if(existingItem is null)
+            if (item is null)
             {
                 return NotFound();
             }
 
-            Items updatedItem = new Items
-            {
-                Name = itemDto.Name,
-                ShortDescription= itemDto.ShortDescription,
-            };
+            //Items updatedItem = new Items
+            //{
+            //    Name = itemDto.Name,
+            //    ShortDescription = itemDto.ShortDescription,
+            //    UpdatedOn = DateTime.Now,
+            //};
 
-            existingItem = updatedItem;
-
-            _itemsRepo.Update(updatedItem);
+            item.Name = itemDto.Name;
+            item.ShortDescription = itemDto.ShortDescription;
+            item.UpdatedOn = DateTime.Now;
+            _itemsRepo.Update(item);
 
             return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult DeleteItem(int itemId)
+        [HttpDelete("{id}")]
+        public ActionResult DeleteItem(int id)
         {
-            var existingItem = _itemsRepo.GetById(itemId);
+            var existingItem = _itemsRepo.GetById(id);
 
             if (existingItem is null)
             {
                 return NotFound();
             }
 
-            _itemsRepo.Delete(itemId);
+            _itemsRepo.Delete(id);
 
             return Ok();
         }

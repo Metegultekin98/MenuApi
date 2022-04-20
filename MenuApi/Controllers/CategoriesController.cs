@@ -19,16 +19,16 @@ namespace MenuApi.Controllers
         }
 
         [HttpGet("GetCategories")]
-        public IActionResult GetItems()
+        public IActionResult GetAllCategories()
         {
-            var items = _categoryRepo.GetAll().Select(item => item.AsDto());
-            return Ok(items);
+            var categories = _categoryRepo.GetAll().Select(item => item.AsDto());
+            return Ok(categories);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetItem(int categoryId)
+        public IActionResult GetCategoryById(int id)
         {
-            var item = _categoryRepo.GetById(categoryId);
+            var item = _categoryRepo.GetById(id);
 
             if (item == null)
             {
@@ -39,59 +39,57 @@ namespace MenuApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(CategoryDto categoryDto)
+        public IActionResult CreateCategory(CategoryDto categoryDto)
         {
-            var now = DateTime.Now;
-            var zeroDate = DateTime.MinValue.AddHours(now.Hour).AddMinutes(now.Minute).AddSeconds(now.Second).AddMilliseconds(now.Millisecond);
-            int uniqueId = (int)(zeroDate.Ticks / 10000);
+            //var zeroDate = DateTime.MinValue.AddHours(now.Hour).AddMinutes(now.Minute).AddSeconds(now.Second).AddMilliseconds(now.Millisecond);
+            //int uniqueId = (int)(zeroDate.Ticks / 10000);
 
             Category item = new()
             {
                 Name = categoryDto.Name,
                 Url = categoryDto.Url,
-                Id = uniqueId,
-                CreatedOn = now,
+                CreatedOn = DateTime.Now,
             };
 
             _categoryRepo.Insert(item);
 
-            return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item.AsDto());
+            return CreatedAtAction(nameof(GetCategoryById), new { id = item.Id }, item.AsDto());
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateItem(int categoryId, CategoryDto categoryDto)
+        public ActionResult UpdateCategory(int id, CategoryDto categoryDto)
         {
-            var existingItem = _categoryRepo.GetById(categoryId);
+            var existingCategory = _categoryRepo.GetById(id);
 
-            if (existingItem is null)
+            if (existingCategory is null)
             {
                 return NotFound();
             }
 
-            Category updatedItem = new Category
+            Category updatedCategory = new Category
             {
                 Name = categoryDto.Name,
                 Url = categoryDto.Url,
             };
 
-            existingItem = updatedItem;
+            existingCategory = updatedCategory;
 
-            _categoryRepo.Update(updatedItem);
+            _categoryRepo.Update(updatedCategory);
 
             return NoContent();
         }
 
         [HttpDelete]
-        public ActionResult DeleteItem(int categoryId)
+        public ActionResult DeleteCategory(int id)
         {
-            var existingItem = _categoryRepo.GetById(categoryId);
+            var existingItem = _categoryRepo.GetById(id);
 
             if (existingItem is null)
             {
                 return NotFound();
             }
 
-            _categoryRepo.Delete(categoryId);
+            _categoryRepo.Delete(id);
 
             return Ok();
         }

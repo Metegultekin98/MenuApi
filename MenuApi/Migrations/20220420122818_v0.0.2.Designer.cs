@@ -4,6 +4,7 @@ using MenuApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MenuApi.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220420122818_v0.0.2")]
+    partial class v002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +34,9 @@ namespace MenuApi.Migrations
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -110,6 +115,9 @@ namespace MenuApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("ExtrasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<int?>("MediaGalleryId")
@@ -241,6 +249,9 @@ namespace MenuApi.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PictureId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Size")
                         .HasColumnType("int");

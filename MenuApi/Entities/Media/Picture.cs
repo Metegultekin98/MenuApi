@@ -1,10 +1,11 @@
-﻿using System.IO;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MenuApi.Entities.Media
 {
     public partial class Picture : BaseEntity
     {
-        public int PictureId { get; set; }
         public int? Size { get; set; }
         public string ThumbImageUrl { get; set; }
         public string ImageUrl { get; set; }
@@ -13,6 +14,8 @@ namespace MenuApi.Entities.Media
         public int? FullSizeImageHeight { get; set; }
         public string Title { get; set; }
         public string AlternateText { get; set; }
-        //public FileSystemInfo File { get; set; }
+        [NotMapped]
+        public IFormFile File { get; set; }
+        public string ImageData { get; set; }
     }
 }

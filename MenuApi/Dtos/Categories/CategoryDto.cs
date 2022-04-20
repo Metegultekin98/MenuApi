@@ -4,7 +4,6 @@ namespace MenuApi.Dtos.Categories
 {
     public class CategoryDto
     {
-        public int CategoryId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public PictureDto PictureModel { get; set; } = new PictureDto();

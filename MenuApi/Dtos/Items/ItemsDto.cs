@@ -4,7 +4,6 @@ namespace MenuApi.Dtos.Items
 {
     public class ItemsDto
     {
-        public int ItemId { get; set; }
         public MediaGalleryDto MediaGallery { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }

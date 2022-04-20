@@ -1,8 +1,11 @@
-﻿namespace MenuApi.Dtos.Media
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MenuApi.Dtos.Media
 {
     public class PictureDto
     {
-        public int PictureId { get; set; }
         public int? Size { get; set; }
         public string ThumbImageUrl { get; set; }
         public string ImageUrl { get; set; }
@@ -11,6 +14,8 @@
         public int? FullSizeImageHeight { get; set; }
         public string Title { get; set; }
         public string AlternateText { get; set; }
-        //public FileSystemInfo File { get; set; }
+        [NotMapped]
+        public IFormFile File { get; set; }
+        public string ImageData { get; set; }
     }
 }

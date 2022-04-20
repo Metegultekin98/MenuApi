@@ -7,11 +7,14 @@ using MenuApi.Entities.Categories;
 using MenuApi.Entities.Items;
 using MenuApi.Entities.Media;
 using MenuApi.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace MenuApi
 {
@@ -26,7 +29,6 @@ namespace MenuApi
         {
             return new ItemsDto
             {
-                ItemId = item.Id,
                 Name = item.Name,
                 ShortDescription = item.ShortDescription,
             };
@@ -41,7 +43,6 @@ namespace MenuApi
         {
             return new CategoryDto
             {
-                CategoryId = category.Id,
                 Name = category.Name,
                 Url = category.Url,
             };
@@ -58,14 +59,21 @@ namespace MenuApi
             {
                 Title = picture.Title,
                 AlternateText = picture.AlternateText,
-                PictureId = picture.PictureId,
                 FullSizeImageHeight = picture.FullSizeImageHeight,
                 FullSizeImageUrl = picture.FullSizeImageUrl,
                 FullSizeImageWidth = picture.FullSizeImageWidth,
                 ImageUrl = picture.ImageUrl,
                 ThumbImageUrl = picture.ThumbImageUrl,
                 Size = picture.Size,
+                ImageData = picture.ImageData,
             };
+        }
+
+        public static byte[] GetBytes(this IFormFile formFile)
+        {
+            using var memoryStream = new MemoryStream();
+            formFile.CopyTo(memoryStream);
+            return memoryStream.ToArray();
         }
 
         public static void RegisterRepo(this IServiceCollection services)

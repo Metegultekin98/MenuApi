@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\MediaStorage\" />
     <Folder Include="Services\Categories\" />
     <Folder Include="Services\Media\" />
   </ItemGroup>
