@@ -14,8 +14,7 @@ namespace MenuApi.Entities.Media
         public int? FullSizeImageHeight { get; set; }
         public string Title { get; set; }
         public string AlternateText { get; set; }
-        [NotMapped]
-        public IFormFile File { get; set; }
         public string ImageData { get; set; }
+        public IList<Items.Items> Items { get; set; }
     }
 }

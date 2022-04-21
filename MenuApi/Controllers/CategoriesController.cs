@@ -1,6 +1,7 @@
 ﻿using MenuApi.Dtos.Categories;
 using MenuApi.Entities.Categories;
 using MenuApi.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,8 +39,9 @@ namespace MenuApi.Controllers
             return Ok(item.AsDto());
         }
 
+        [Authorize]
         [HttpPost]
-        public IActionResult CreateCategory(CategoryDto categoryDto)
+        public IActionResult CreateCategory([FromBody] CategoryDto categoryDto)
         {
             //var zeroDate = DateTime.MinValue.AddHours(now.Hour).AddMinutes(now.Minute).AddSeconds(now.Second).AddMilliseconds(now.Millisecond);
             //int uniqueId = (int)(zeroDate.Ticks / 10000);
@@ -56,30 +58,35 @@ namespace MenuApi.Controllers
             return CreatedAtAction(nameof(GetCategoryById), new { id = item.Id }, item.AsDto());
         }
 
+        [Authorize]
         [HttpPut("{id}")]
-        public ActionResult UpdateCategory(int id, CategoryDto categoryDto)
+        public ActionResult UpdateCategory(int id, [FromBody] CategoryDto categoryDto)
         {
-            var existingCategory = _categoryRepo.GetById(id);
+            var category = _categoryRepo.GetById(id);
 
-            if (existingCategory is null)
+            if (category is null)
             {
                 return NotFound();
             }
 
-            Category updatedCategory = new Category
-            {
-                Name = categoryDto.Name,
-                Url = categoryDto.Url,
-            };
+            //Category updatedCategory = new Category
+            //{
+            //    Name = categoryDto.Name,
+            //    Url = categoryDto.Url,
+            //};
 
-            existingCategory = updatedCategory;
+            //existingCategory = updatedCategory;
+            category.Name = categoryDto.Name;
+            category.Url = categoryDto.Url;
+            category.UpdatedOn = DateTime.Now;
 
-            _categoryRepo.Update(updatedCategory);
+            _categoryRepo.Update(category);
 
             return NoContent();
         }
 
-        [HttpDelete]
+        [Authorize]
+        [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {
             var existingItem = _categoryRepo.GetById(id);

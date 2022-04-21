@@ -3,6 +3,7 @@ using MenuApi.Dtos.Items;
 using MenuApi.Entities;
 using MenuApi.Entities.Items;
 using MenuApi.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace MenuApi.Controllers
             return Ok(item.AsDto());
         }
 
+        [Authorize]
         [HttpPost("CreateItem")]
         public IActionResult CreateItem([FromBody] ItemsDto itemDto)
         {
@@ -60,6 +62,7 @@ namespace MenuApi.Controllers
             return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item.AsDto());
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateItem(int id, [FromBody] ItemsDto itemDto)
         {
@@ -85,6 +88,7 @@ namespace MenuApi.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteItem(int id)
         {

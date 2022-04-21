@@ -17,5 +17,6 @@ namespace MenuApi.Dtos.Media
         [NotMapped]
         public IFormFile File { get; set; }
         public string ImageData { get; set; }
+        public IList<Items.ItemsDto> Items { get; set; }
     }
 }

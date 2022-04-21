@@ -14,7 +14,6 @@ namespace MenuApi.Data
         DbSet<Items> Items { get; set; }
         DbSet<ItemsTag> ItemsTag { get; set; }
         DbSet<Picture> Picture { get; set; }
-        DbSet<MediaGallery> MediaGallery { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {
