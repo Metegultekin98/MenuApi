@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MenuApi.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220421163002_v0.0.3_Mappings")]
-    partial class v003_Mappings
+    [Migration("20220422102758_v0.0.31_Mappings")]
+    partial class v0031_Mappings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
