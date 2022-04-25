@@ -1,4 +1,4 @@
-﻿using MenuApi.Dtos.Categories;
+﻿using MenuShared.Dtos.Categories;
 using MenuApi.Entities.Categories;
 using MenuApi.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -39,7 +39,6 @@ namespace MenuApi.Controllers
             return Ok(item.AsDto());
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CategoryDto categoryDto)
         {
@@ -58,7 +57,6 @@ namespace MenuApi.Controllers
             return CreatedAtAction(nameof(GetCategoryById), new { id = item.Id }, item.AsDto());
         }
 
-        [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, [FromBody] CategoryDto categoryDto)
         {
@@ -85,7 +83,6 @@ namespace MenuApi.Controllers
             return NoContent();
         }
 
-        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {

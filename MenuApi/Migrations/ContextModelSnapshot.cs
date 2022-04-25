@@ -81,7 +81,7 @@ namespace MenuApi.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -100,7 +100,7 @@ namespace MenuApi.Migrations
 
                     b.HasIndex("PictureModelId");
 
-                    b.ToTable("Category");
+                    b.ToTable("CategoryMap", (string)null);
                 });
 
             modelBuilder.Entity("MenuApi.Entities.Items.ItemExtras", b =>
@@ -117,7 +117,7 @@ namespace MenuApi.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ItemsId")
@@ -156,7 +156,7 @@ namespace MenuApi.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -170,7 +170,7 @@ namespace MenuApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Items");
+                    b.ToTable("ItemsMap", (string)null);
                 });
 
             modelBuilder.Entity("MenuApi.Entities.Items.ItemsTag", b =>
@@ -187,7 +187,7 @@ namespace MenuApi.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -218,7 +218,7 @@ namespace MenuApi.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int?>("FullSizeImageHeight")
@@ -250,7 +250,7 @@ namespace MenuApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Picture");
+                    b.ToTable("MediasMap", (string)null);
                 });
 
             modelBuilder.Entity("CategoryItems", b =>

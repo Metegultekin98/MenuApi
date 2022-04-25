@@ -1,7 +1,7 @@
-﻿using MenuApi.Dtos;
-using MenuApi.Dtos.Categories;
-using MenuApi.Dtos.Items;
-using MenuApi.Dtos.Media;
+﻿using MenuShared.Dtos;
+using MenuShared.Dtos.Categories;
+using MenuShared.Dtos.Items;
+using MenuShared.Dtos.Media;
 using MenuApi.Entities;
 using MenuApi.Entities.Categories;
 using MenuApi.Entities.Items;

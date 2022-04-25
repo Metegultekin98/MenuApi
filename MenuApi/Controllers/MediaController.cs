@@ -1,4 +1,4 @@
-﻿using MenuApi.Dtos.Media;
+﻿using MenuShared.Dtos.Media;
 using MenuApi.Entities.Media;
 using MenuApi.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -66,7 +66,6 @@ namespace MenuApi.Controllers
             return Ok(item.AsDto());
         }
 
-        [Authorize]
         [HttpPost("CreateMedia")]
         public IActionResult CreateMedia([FromForm] PictureDto pictureDto)
         {
@@ -125,7 +124,6 @@ namespace MenuApi.Controllers
         //    return NoContent();
         //}
 
-        [Authorize]
         [HttpDelete("DeleteMedia/{id}")]
         public ActionResult DeleteMedia(int id)
         {

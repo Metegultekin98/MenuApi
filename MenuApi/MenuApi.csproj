@@ -27,4 +27,8 @@
     <Folder Include="Services\Media\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MenuShared\MenuShared.csproj" />
+  </ItemGroup>
+
 </Project>

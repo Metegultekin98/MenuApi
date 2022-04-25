@@ -1,0 +1,59 @@
+﻿@page "/items/list"
+@inject HttpClient Http;
+@using MenuShared.Dtos.Items
+
+<h3>ItemList</h3>
+@if (loading)
+{
+    <p>Yükleniyor..</p>
+}
+else if (Items == null || !Items.Any())
+{
+    <p>Kayıt bulunamadı.</p>
+}
+else
+{
+    <tr>
+        <td>Name</td>
+        <td>Categories</td>
+        <td>Short Description</td>
+        <td>Pictures</td>
+        <td>Tags</td>
+        <td>
+            <button>+ Add New</button>
+        </td>
+    </tr>
+    foreach (var item in Items)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Categories</td>
+            <td>@item.ShortDescription</td>
+            <td>@item.Pictures</td>
+            <td>@item.Tags</td>
+            <td>
+                <button class="btn btn-primary" @onclick="()=> EditItem(item)">Edit</button>
+                <button class="btn btn-primary" @onclick="()=> DeleteItem(item.IdDto)">Delete</button>
+            </td>
+        </tr>
+    }
+}
+
+@code {
+    private ItemsDto[] Items;
+    private bool loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await Http.GetFromJsonAsync<ItemsDto[]>("items");
+        loading = false;
+    }
+    private async Task EditItem(ItemsDto item)
+    {
+        await Http.PutAsJsonAsync<ItemsDto>($"items/{item.IdDto}",item);
+    }
+    private async Task DeleteItem(int itemId)
+    {
+        await Http.DeleteAsync($"items/{itemId}");
+    }
+}

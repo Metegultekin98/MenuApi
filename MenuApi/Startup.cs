@@ -79,7 +79,7 @@ namespace MenuApi
             app.UseAuthentication();
 
             app.UseAuthorization();
-
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,5 +1,5 @@
-﻿using MenuApi.Dtos;
-using MenuApi.Dtos.Items;
+﻿using MenuShared.Dtos;
+using MenuShared.Dtos.Items;
 using MenuApi.Entities;
 using MenuApi.Entities.Items;
 using MenuApi.Repositories;
@@ -22,7 +22,7 @@ namespace MenuApi.Controllers
             _itemsRepo = itemsRepo ?? throw new ArgumentNullException(nameof(itemsRepo));
         }
 
-        [HttpGet("GetItems")]
+        [HttpGet]
         public IActionResult GetItems()
         {
             var items = _itemsRepo.GetAll().Select(item => item.AsDto());
@@ -42,8 +42,7 @@ namespace MenuApi.Controllers
             return Ok(item.AsDto());
         }
 
-        [Authorize]
-        [HttpPost("CreateItem")]
+        [HttpPost]
         public IActionResult CreateItem([FromBody] ItemsDto itemDto)
         {
             var now = DateTime.Now;
@@ -62,7 +61,6 @@ namespace MenuApi.Controllers
             return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item.AsDto());
         }
 
-        [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateItem(int id, [FromBody] ItemsDto itemDto)
         {
@@ -88,7 +86,6 @@ namespace MenuApi.Controllers
             return NoContent();
         }
 
-        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteItem(int id)
         {

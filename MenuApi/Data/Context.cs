@@ -1,6 +1,7 @@
 ﻿using MenuApi.Entities.Categories;
 using MenuApi.Entities.Items;
 using MenuApi.Entities.Media;
+using MenuApi.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -19,6 +20,13 @@ namespace MenuApi.Data
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(ConnectionString);
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .ApplyConfiguration(new CategoryConfig())
+                .ApplyConfiguration(new ItemsConfig())
+                .ApplyConfiguration(new MediaConfig());
         }
     }
 }
