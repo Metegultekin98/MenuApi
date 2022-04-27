@@ -81,6 +81,16 @@ namespace MenuApi.Controllers
             item.Name = itemDto.Name;
             item.ShortDescription = itemDto.ShortDescription;
             item.UpdatedOn = DateTime.Now;
+            item.Categories.Clear();
+            item.Categories = itemDto.Categories.Select(x => new Entities.Categories.Category
+            {
+                Name = x.Name,
+                Url = x.Url,
+                Id = x.IdDto,
+            }).ToList();
+
+
+
             _itemsRepo.Update(item);
 
             return NoContent();

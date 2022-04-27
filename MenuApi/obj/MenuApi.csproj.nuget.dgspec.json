@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj": {}
+    "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj": {
+    "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj",
+        "projectUniqueName": "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj",
         "projectName": "MenuApi",
-        "projectPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\MenuApi.csproj",
+        "projectPath": "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\MenuApi.csproj",
         "packagesPath": "C:\\Users\\Serhan Buran\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuApi\\obj\\",
+        "outputPath": "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuShared\\MenuShared.csproj": {
-                "projectPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuShared\\MenuShared.csproj"
+              "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuShared\\MenuShared.csproj": {
+                "projectPath": "C:\\Users\\Serhan Buran\\Source\\Repos\\Metegultekin98\\MenuApi\\MenuShared\\MenuShared.csproj"
               }
             }
           }
@@ -107,14 +107,14 @@
         }
       }
     },
-    "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuShared\\MenuShared.csproj": {
+    "C:\\Users\\Serhan Buran\\source\\repos\\Metegultekin98\\MenuApi\\MenuShared\\MenuShared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuShared\\MenuShared.csproj",
+        "projectUniqueName": "C:\\Users\\Serhan Buran\\source\\repos\\Metegultekin98\\MenuApi\\MenuShared\\MenuShared.csproj",
         "projectName": "MenuShared",
-        "projectPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuShared\\MenuShared.csproj",
+        "projectPath": "C:\\Users\\Serhan Buran\\source\\repos\\Metegultekin98\\MenuApi\\MenuShared\\MenuShared.csproj",
         "packagesPath": "C:\\Users\\Serhan Buran\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Serhan Buran\\source\\repos\\MenuApi\\MenuShared\\obj\\",
+        "outputPath": "C:\\Users\\Serhan Buran\\source\\repos\\Metegultekin98\\MenuApi\\MenuShared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -125,15 +125,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -144,8 +144,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",

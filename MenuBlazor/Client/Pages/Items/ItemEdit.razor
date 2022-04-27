@@ -1,0 +1,71 @@
+﻿@inject HttpClient Http
+@using MenuShared.Dtos.Categories
+@using MenuShared.Dtos.Items
+
+
+<EditForm Model="Item" OnSubmitted="EditItem">
+    <div class="form-group">
+        <label for="item-name">Item Name</label>
+        <InputText @bind-Value="@Item.Name" class="form-control" id="item-name" />
+    </div>
+    <div class="form-group">
+        <label for="item-name">Item Name</label>
+        @foreach(var cat in CatList)
+        {
+            <label for="cat-name">@cat.Name</label>
+            <InputCheckbox @bind="@Item.Categories.Any(w=> w.IdDto == cat.IdDto)" @onchange="()=> UpdateList(Item, cat)" class="form-control" id="cat-name" />
+        }
+    </div>
+    <button  type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    <button @onclick="()=>ModalInstance.CancelAsync()" class="btn btn-secondary">Cancel</button>
+</EditForm>
+@*<div class="simple-form">
+
+    <div class="form-group">
+        <label for="movie-name">Movie Name</label>
+        <input @bind="@Item." type="text" class="form-control" id="movie-name" />
+    </div>
+
+    <div class="form-group">
+        <label for="year">Year</label>
+        <input @bind="@Movie.Year" type="text" class="form-control" id="year" />
+    </div>
+
+
+</div>*@
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter] public int ItemId { get; set; }
+
+    private ItemsDto Item { get; set; } = new ItemsDto();
+
+    private List<CategoryDto> CatList { get; set; } = new List<CategoryDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Item = await Http.GetFromJsonAsync<ItemsDto>($"items/{ItemId}");
+        CatList = await Http.GetFromJsonAsync<List<CategoryDto>>("/category");
+    }
+    private async Task EditItem()
+    {
+        await Http.PutAsJsonAsync<ItemsDto>($"items/{Item.IdDto}",Item);
+        await ModalInstance.CloseAsync(ModalResult.Ok(true));
+
+    }
+
+    private async Task UpdateList(ItemsDto item, CategoryDto cat)
+    {
+
+        if(item.Categories.Any(w=>w.IdDto == cat.IdDto))
+        {
+            item.Categories.Remove(cat);
+        }
+        else
+        {
+            item.Categories.Add(cat);
+        }
+    }
+}
