@@ -29,8 +29,51 @@ namespace MenuApi
         {
             return new ItemsDto
             {
+                IdDto = item.Id,
                 Name = item.Name,
                 ShortDescription = item.ShortDescription,
+                UpdatedOnDto = item.UpdatedOn,
+                ActiveDto = item.Active,
+                CreatedOnDto = item.CreatedOn,
+                DeletedDto = item.Deleted,
+            };
+        }
+
+        /// <summary>
+        /// Converts an item extras to a Data Transfer Object
+        /// </summary>
+        /// <param name="itemTag"></param>
+        /// <returns>ItemsTagDto</returns>
+        public static ItemsTagDto AsDto(this ItemsTag itemTag)
+        {
+            return new ItemsTagDto
+            {
+                IdDto = itemTag.Id,
+                UpdatedOnDto= itemTag.UpdatedOn,
+                Name = itemTag.Name,
+                CreatedOnDto= itemTag.CreatedOn,
+                DeletedDto= itemTag.Deleted,
+                ActiveDto= itemTag.Active,
+            };
+        }
+
+        /// <summary>
+        /// Converts an item extras to a Data Transfer Object
+        /// </summary>
+        /// <param name="itemTag"></param>
+        /// <returns>ItemsTagDto</returns>
+        public static ItemExtrasDto AsDto(this ItemExtras itemExtra)
+        {
+            return new ItemExtrasDto
+            {
+                IdDto= itemExtra.Id,
+                ActiveDto = itemExtra.Active,
+                DeletedDto= itemExtra.Deleted,
+                CreatedOnDto = itemExtra.CreatedOn,
+                UpdatedOnDto = itemExtra.UpdatedOn,
+                Name= itemExtra.Name,
+                Price = itemExtra.Price,
+                Total = itemExtra.Total,
             };
         }
 
@@ -43,8 +86,13 @@ namespace MenuApi
         {
             return new CategoryDto
             {
+                IdDto = category.Id,
                 Name = category.Name,
                 Url = category.Url,
+                DeletedDto = category.Deleted,
+                CreatedOnDto = category.CreatedOn,
+                ActiveDto = category.Active,
+                UpdatedOnDto = category.UpdatedOn,
             };
         }
 
@@ -66,6 +114,11 @@ namespace MenuApi
                 ThumbImageUrl = picture.ThumbImageUrl,
                 Size = picture.Size,
                 ImageData = picture.ImageData,
+                ActiveDto = picture.Active,
+                DeletedDto= picture.Deleted,
+                CreatedOnDto= picture.CreatedOn,
+                UpdatedOnDto= picture.UpdatedOn,
+                IdDto = picture.Id,
             };
         }
 

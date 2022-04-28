@@ -1,0 +1,68 @@
+﻿@page "/category/list"
+@inject HttpClient Http;
+@using MenuShared.Dtos.Categories
+
+<h3>ItemList</h3>
+@if (loading)
+{
+    <p>Yükleniyor..</p>
+}
+else if (Categories == null || !Categories.Any())
+{
+    <p>Kategori bulunamadı.</p>
+}
+else
+{
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Url</td>
+        <td>
+            <button class="btn btn-primary" @onclick="()=> ShowCreateCategory()">+ Add New</button>
+        </td>
+    </tr>
+    foreach (var cat in Categories)
+    {
+        <tr>
+            <td>@cat.IdDto</td>
+            <td>@cat.Name</td>
+            <td>@cat.Url</td>
+            <td>
+                <button class="btn btn-primary" @onclick="()=> ShowEditCategory(cat.IdDto)">Edit</button>
+                <button class="btn btn-primary" @onclick="()=> ShowDeleteCategory(cat.IdDto)">Delete</button>
+            </td>
+        </tr>
+    }
+}
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+    private CategoryDto[] Categories;
+    private bool loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await Http.GetFromJsonAsync<CategoryDto[]>("category");
+        loading = false;
+    }
+    void ShowEditCategory(int catId)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(CategoryEdit.CatId), catId);
+
+        Modal.Show<CategoryEdit>("Edit Category", parameters);
+    }
+
+    void ShowCreateCategory()
+    {
+        Modal.Show<CategoryCreate>("Create Category");
+    }
+
+    void ShowDeleteCategory(int catId)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(CategoryDelete.ItemId), catId);
+
+        Modal.Show<CategoryEdit>("Edit Category", parameters);
+    }
+}

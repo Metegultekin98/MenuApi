@@ -16,10 +16,12 @@ namespace MenuApi.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IRepository<Items> _itemsRepo;
+        private readonly IRepository<ItemsTag> _itemsTagRepo;
 
-        public ItemsController(IRepository<Items> itemsRepo)
+        public ItemsController(IRepository<Items> itemsRepo, IRepository<ItemsTag> itemsTagRepo)
         {
             _itemsRepo = itemsRepo ?? throw new ArgumentNullException(nameof(itemsRepo));
+            _itemsTagRepo = itemsTagRepo ?? throw new ArgumentNullException(nameof(itemsTagRepo));
         }
 
         [HttpGet]
@@ -27,6 +29,13 @@ namespace MenuApi.Controllers
         {
             var items = _itemsRepo.GetAll().Select(item => item.AsDto());
             return Ok(items);
+        }
+
+        [HttpGet("/tags")]
+        public IActionResult GetTags()
+        {
+            var tags = _itemsTagRepo.GetAll().Select(tag => tag.AsDto());
+            return Ok(tags);
         }
 
         [HttpGet("{id}")]

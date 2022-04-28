@@ -1,4 +1,88 @@
-﻿<h3>ItemCreate</h3>
+﻿@inject HttpClient Http
+@using MenuShared.Dtos.Categories
+@using MenuShared.Dtos.Items
+
+
+<EditForm Model="Item" OnSubmitted="@CreateItem">
+    <div class="form-group">
+        <label for="item-name">Item Name</label>
+        <InputText @bind-Value="@Item.Name" class="form-control" id="item-name" />
+    </div>
+    <div class="form-group">
+        <label for="item-name">Item Name</label>
+        @foreach(var cat in CatList)
+        {
+            <label for="cat-name">@cat.Name</label>
+            <InputCheckbox @bind="@Item.Categories.Any(w=> w.IdDto == cat.IdDto)" @onchange="()=> UpdateCatList(Item, cat)" class="form-control" id="cat-name" />
+        }
+    </div>
+    <div class="form-group">
+        <label for="item-desc">Item Short Description</label>
+        <InputTextArea @bind-Value="@Item.ShortDescription" class="form-control" id="item-desc" />
+    </div>
+    <div class="form-group">
+        <label for="item-pictures">Item Pictures</label>
+        <InputFile @bind-Value="@Item.Pictures" class="form-control" id="item-pictures" />
+    </div>
+    <div class="form-group">
+        <label for="item-name">Item Name</label>
+        @foreach(var tag in TagList)
+        {
+            <label for="tag-name">@tag.Name</label>
+            <InputCheckbox @bind="@Item.Tags.Any(w=> w.IdDto == tag.IdDto)" @onchange="()=> UpdateTagList(Item, tag)" class="form-control" id="tag-name" />
+        }
+    </div>
+    <button  type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    <button @onclick="()=>ModalInstance.CancelAsync()" class="btn btn-secondary">Cancel</button>
+</EditForm>
+
 @code {
 
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter] public int ItemId { get; set; }
+
+    private ItemsDto Item { get; set; } = new ItemsDto();
+
+    private List<CategoryDto> CatList { get; set; } = new List<CategoryDto>();
+
+    private List<ItemsTagDto> TagList { get; set; } = new List<ItemsTagDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Item = await Http.GetFromJsonAsync<ItemsDto>($"items/{ItemId}");
+        CatList = await Http.GetFromJsonAsync<List<CategoryDto>>("/category");
+        TagList = await Http.GetFromJsonAsync<List<ItemsTagDto>>("/tags");
+    }
+    private async Task CreateItem()
+    {
+        await Http.PostAsJsonAsync<ItemsDto>($"items/{Item.IdDto}",Item);
+        await ModalInstance.CloseAsync(ModalResult.Ok(true));
+
+    }
+
+    private async Task UpdateCatList(ItemsDto item, CategoryDto cat)
+    {
+
+        if(item.Categories.Any(w=>w.IdDto == cat.IdDto))
+        {
+            item.Categories.Remove(cat);
+        }
+        else
+        {
+            item.Categories.Add(cat);
+        }
+    }
+        private async Task UpdateTagList(ItemsDto item, ItemsTagDto tag)
+    {
+
+        if(item.Tags.Any(w=>w.IdDto == tag.IdDto))
+        {
+            item.Tags.Remove(tag);
+        }
+        else
+        {
+            item.Tags.Add(tag);
+        }
+    }
 }

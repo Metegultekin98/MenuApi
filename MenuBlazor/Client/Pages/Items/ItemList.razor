@@ -14,32 +14,35 @@ else if (Items == null || !Items.Any())
 else
 {
     <tr>
+        <td>ID</td>
         <td>Name</td>
         <td>Categories</td>
         <td>Short Description</td>
         <td>Pictures</td>
         <td>Tags</td>
         <td>
-            <button>+ Add New</button>
+            <button class="btn btn-primary" @onclick="()=> ShowCreateItem()">+ Add New</button>
         </td>
     </tr>
     foreach (var item in Items)
     {
         <tr>
+            <td>@item.IdDto</td>
             <td>@item.Name</td>
             <td>@item.Categories</td>
             <td>@item.ShortDescription</td>
             <td>@item.Pictures</td>
             <td>@item.Tags</td>
             <td>
-                <button class="btn btn-primary" @onclick="()=> EditItem(item)">Edit</button>
-                <button class="btn btn-primary" @onclick="()=> DeleteItem(item.IdDto)">Delete</button>
+                <button class="btn btn-primary" @onclick="()=> ShowEditItem(item.IdDto)">Edit</button>
+                <button class="btn btn-primary" @onclick="()=> ShowDeleteItem(item.IdDto)">Delete</button>
             </td>
         </tr>
     }
 }
 
 @code {
+    [CascadingParameter] public IModalService Modal { get; set; }
     private ItemsDto[] Items;
     private bool loading = true;
 
@@ -48,12 +51,24 @@ else
         Items = await Http.GetFromJsonAsync<ItemsDto[]>("items");
         loading = false;
     }
-    private async Task EditItem(ItemsDto item)
+    void ShowEditItem(int itemId)
     {
-        await Http.PutAsJsonAsync<ItemsDto>($"items/{item.IdDto}",item);
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(ItemEdit.ItemId), itemId);
+
+        Modal.Show<ItemEdit>("Edit Item", parameters);
     }
-    private async Task DeleteItem(int itemId)
+
+    void ShowCreateItem()
     {
-        await Http.DeleteAsync($"items/{itemId}");
+        Modal.Show<ItemCreate>("Create Item");
+    }
+
+    void ShowDeleteItem(int itemId)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(ItemDelete.ItemId), itemId);
+
+        Modal.Show<ItemEdit>("Edit Item", parameters);
     }
 }

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MenuApi", "MenuApi\MenuApi.csproj", "{AF6E89E6-803A-453E-A798-3A6AAA99B2A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuShared", "MenuShared\MenuShared.csproj", "{E9180737-1184-4ABD-966C-7FC5A346980B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MenuShared", "MenuShared\MenuShared.csproj", "{E9180737-1184-4ABD-966C-7FC5A346980B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuBlazor.Client", "MenuBlazor\Client\MenuBlazor.Client.csproj", "{2A83CE3D-7B93-4D5C-B34F-435186185381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MenuBlazor.Client", "MenuBlazor\Client\MenuBlazor.Client.csproj", "{2A83CE3D-7B93-4D5C-B34F-435186185381}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
