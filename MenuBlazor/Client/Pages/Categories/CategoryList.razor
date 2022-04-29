@@ -61,8 +61,8 @@ else
     void ShowDeleteCategory(int catId)
     {
         var parameters = new ModalParameters();
-        parameters.Add(nameof(CategoryDelete.ItemId), catId);
+        parameters.Add(nameof(CategoryDelete.CatId), catId);
 
-        Modal.Show<CategoryEdit>("Edit Category", parameters);
+        Modal.Show<CategoryDelete>("Delete Category", parameters);
     }
 }

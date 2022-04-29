@@ -1,0 +1,61 @@
+﻿@inject HttpClient Http
+@using MenuShared.Dtos.Categories
+@using MenuShared.Dtos.Items
+
+
+<EditForm Model="Category" OnSubmitted="@CreateCategory">
+    <div class="form-group">
+        <label for="cat-name">Category Name</label>
+        <InputText @bind-Value="@Category.Name" class="form-control" id="cat-name" />
+    </div>
+    <div class="form-group">
+        <label for="item-name">Item Name</label>
+        @foreach(var item in ItemList)
+        {
+            <label for="item-name">@item.Name</label>
+            <InputCheckbox @bind="@Category.ItemList.Any(w=> w.IdDto == item.IdDto)" @onchange="()=> UpdateItemList(Category, item)" class="form-control" id="item-name" />
+        }
+    </div>
+    <div class="form-group">
+        <label for="cat-picture">Category Picture</label>
+        <InputFile @bind-Value="@Category.PictureModel" class="form-control" id="cat-picture" />
+    </div>
+    <button  type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    <button @onclick="()=>ModalInstance.CancelAsync()" class="btn btn-secondary">Cancel</button>
+</EditForm>
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter] public int CatId { get; set; }
+
+    private CategoryDto Category { get; set; } = new CategoryDto();
+
+    private List<ItemsDto> ItemList { get; set; } = new List<ItemsDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Category = await Http.GetFromJsonAsync<CategoryDto>($"category/{CatId}");
+        ItemList = await Http.GetFromJsonAsync<List<ItemsDto>>("/category");
+    }
+    private async Task CreateCategory()
+    {
+        await Http.PostAsJsonAsync<CategoryDto>($"category/{Category.IdDto}",Category);
+        await ModalInstance.CloseAsync(ModalResult.Ok(true));
+
+    }
+
+    private async Task UpdateItemList(CategoryDto cat, ItemsDto item)
+    {
+
+        if(cat.ItemList.Any(w=>w.IdDto == item.IdDto))
+        {
+            cat.ItemList.Remove(item);
+        }
+        else
+        {
+            cat.ItemList.Add(item);
+        }
+    }
+}
